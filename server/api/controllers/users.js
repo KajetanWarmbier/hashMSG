@@ -40,7 +40,33 @@ exports.user_sign_up = (req, res, next) => {
 };
 
 exports.user_login = (req, res, next) => {
-  res.status(200).json({ message: 'Logged in' });
+  User.findOne({ username: req.body.username }).then((user) => {
+    if (!user) {
+      return res
+        .status(401)
+        .json({ message: 'Unauthorized. Invalid authentication credentials.' });
+    } else {
+      bcrypt.compare(req.body.password, user.password).then((result) => {
+        if (!result) {
+          return res.status(401).json({
+            message: 'Unauthorized. Invalid authentication credentials.',
+          });
+        } else {
+          const userData = {
+            _id: user._id,
+            username: user.username,
+            private_key: user.private_key,
+            public_key: user.public_key,
+            mnemonics: user.mnemonics,
+            address: user.address,
+            friends_list: user.friends_list,
+          };
+
+          return res.status(200).json({ message: 'Logged in', userData });
+        }
+      });
+    }
+  });
 };
 
 exports.user_add_friend = (req, res, next) => {

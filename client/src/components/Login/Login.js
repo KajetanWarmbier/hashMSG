@@ -29,7 +29,7 @@ const Login = () => {
           ></input>
           <input
             type='password'
-            placeholder='Username'
+            placeholder='Password'
             className='bg-white bg-opacity-80 rounded-2xl text-black text-lg p-4 h-[45px] w-[310px]'
           ></input>
 
