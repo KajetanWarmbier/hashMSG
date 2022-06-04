@@ -2,21 +2,19 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineSettings, MdLogout, MdSearch } from 'react-icons/md';
-import userData from '../../redux/userData';
 import UserAvatar from '../UsersPersonality/UserAvatar';
 import UserConversation from '../UsersPersonality/UserConversation';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUserData } from '../../redux/userData';
 
 const Home = () => {
   let navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
-
-  const logUserData = () => {
-    console.log(userData);
-  };
+  const dispatch = useDispatch();
 
   const Logout = () => {
-    navigate('/login', { replace: true });
+    dispatch(clearUserData());
+    navigate('/', { replace: true });
   };
 
   const gotoSettings = () => {
@@ -24,8 +22,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    logUserData();
-  }, []);
+    console.log(userData);
+  }, [userData]);
 
   return (
     <div className='text-white'>
