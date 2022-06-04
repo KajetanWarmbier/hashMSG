@@ -24,6 +24,7 @@ const Login = () => {
         password: password,
       })
       .then((response) => {
+        setPassword('');
         console.log(response);
         dispatch(setUserData(response.data.userData));
         navigate('/home', { replace: true });
@@ -32,7 +33,6 @@ const Login = () => {
         console.log(error);
         alert('Auth Failed.');
       });
-
     setPassword('');
   };
 
