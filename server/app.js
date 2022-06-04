@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 require('dotenv').config();
 
@@ -22,6 +23,9 @@ const userRoutes = require('./api/routes/users');
 
 //express instance
 const app = express();
+
+//configure cors policy
+app.use(cors());
 
 //HTTP BODY
 app.use(bodyParser.json());
