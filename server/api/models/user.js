@@ -15,7 +15,10 @@ const userSchema = new mongoose.Schema({
   public_key: String,
   mnemonics: String,
   address: String,
-  firends_list: Array,
+  friends_list: {
+    type: Array,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);
