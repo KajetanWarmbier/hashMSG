@@ -5,6 +5,7 @@ import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Topbar from './components/Topbar/Topbar';
+import Conversation from './components/Conversation/Conversation';
 
 function App() {
   return (
@@ -19,6 +20,11 @@ function App() {
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/home' element={<Home />} />
+                <Route
+                  exact
+                  path='/conversation/:friendUsername'
+                  element={<Conversation />}
+                />
               </Routes>
             </div>
           </div>
