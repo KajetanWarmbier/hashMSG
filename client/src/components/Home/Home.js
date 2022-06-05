@@ -1,8 +1,8 @@
 // import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MdOutlineSettings, MdLogout, MdSearch } from 'react-icons/md';
-import UserAvatar from '../UsersPersonality/UserAvatar';
+import UserConversationBar from '../UsersPersonality/UserConversationBar';
 import UserConversation from '../UsersPersonality/UserConversation';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUserData } from '../../redux/userData';
@@ -11,6 +11,8 @@ const Home = () => {
   let navigate = useNavigate();
   const userData = useSelector((state) => state.userData);
   const dispatch = useDispatch();
+
+  const [friendsList, setFriendsList] = useState([]);
 
   const Logout = () => {
     dispatch(clearUserData());
@@ -23,7 +25,9 @@ const Home = () => {
 
   useEffect(() => {
     console.log(userData);
-  }, [userData]);
+    setFriendsList(userData.data.friends_list);
+    console.log(friendsList);
+  }, [userData, friendsList]);
 
   return (
     <div className='text-white'>
@@ -43,10 +47,14 @@ const Home = () => {
         </div>
 
         <div className='px-8 my-9 grid grid-flow-col auto-cols-max grid-rows-1 gap-5 overflow-hidden'>
-          <UserAvatar userProfileData={'Kai'} />
+          {friendsList.length > 0 &&
+            friendsList.map((friend) => {
+              return <UserConversationBar userProfileData={friend} />;
+            })}
+          {/* <UserAvatar userProfileData={'Kai'} />
           <UserAvatar userProfileData={'Agnieszka'} />
           <UserAvatar userProfileData={'Michał'} />
-          <UserAvatar userProfileData={'Krzysztof'} />
+          <UserAvatar userProfileData={'Krzysztof'} /> */}
         </div>
 
         <hr className='mx-8 my-8 opacity-20' />
@@ -57,10 +65,14 @@ const Home = () => {
         </div>
 
         <div className='px-8 mt-8 grid grid-cols-1 auto-rows-max grid-flow-row gap-8'>
-          <UserConversation userProfileData={'Kai'} />
+          {friendsList.length > 0 &&
+            friendsList.map((friend) => {
+              return <UserConversation userProfileData={friend} />;
+            })}
+          {/* <UserConversation userProfileData={'Kai'} />
           <UserConversation userProfileData={'Agnieszka'} />
           <UserConversation userProfileData={'Michał'} />
-          <UserConversation userProfileData={'Krzysztof'} />
+          <UserConversation userProfileData={'Krzysztof'} /> */}
         </div>
       </div>
     </div>

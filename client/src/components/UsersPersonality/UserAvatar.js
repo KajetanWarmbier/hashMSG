@@ -4,8 +4,8 @@ const UserAvatar = (props) => {
       <img
         width='60px'
         height='60px'
-        src={`https://avatars.dicebear.com/api/bottts/${props.userProfileData}.svg`}
-        alt='Kai Avatar'
+        src={`https://avatars.dicebear.com/api/bottts/${props.userProfileData.friendUsername}.svg`}
+        alt={`${props.userProfileData} Avatar`}
       ></img>
     </div>
   );
