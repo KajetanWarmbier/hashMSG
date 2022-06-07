@@ -25,7 +25,7 @@ const UserConversation = (props) => {
           <h1 className='text-base'>{props.userProfileData.friendUsername}</h1>
         </div>
         <div className='flex bg-white bg-opacity-50 rounded-xl h-[45px]  items-center justify-start '>
-          <h1 className='ml-2'>Some random text</h1>
+          <h1 className='ml-2'>#######</h1>
         </div>
       </div>
     </div>

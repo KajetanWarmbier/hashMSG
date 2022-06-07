@@ -24,10 +24,8 @@ const Home = () => {
   };
 
   useEffect(() => {
-    console.log(userData);
     setFriendsList(userData.data.friends_list);
-    console.log(friendsList);
-  }, [userData, friendsList]);
+  }, [userData]);
 
   return (
     <div className='text-white'>
