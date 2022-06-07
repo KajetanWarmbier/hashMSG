@@ -1,4 +1,4 @@
-# hashMSG :busts_in_silhouette: :speech_balloon:
+# #MSG :busts_in_silhouette: :speech_balloon:
 Repozytorium zawiera aplikację do czatowania, która została stworzona w technologii blockchain.   
 Stworzone w celu zaliczenia przedmiotu.   
 ***
