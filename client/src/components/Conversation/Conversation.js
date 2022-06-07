@@ -5,6 +5,7 @@ import MessageFriend from './MessageFriend';
 import MessageUser from './MessageUser';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Conversation = (props) => {
   const navigate = useNavigate();
@@ -17,7 +18,9 @@ const Conversation = (props) => {
 
   const scrollRef = useRef();
 
+  const [listOfMessages, setListOfMessages] = useState([]);
   const [message, setMessage] = useState('');
+  const [post_type, setpost_type] = useState('');
   const userData = useSelector((state) => state.userData);
 
   const backToHome = () => {
@@ -26,10 +29,62 @@ const Conversation = (props) => {
 
   const sendMessage = (event) => {
     event.preventDefault();
+
+    axios
+      .post('http://localhost:4567/messages/send_message', {
+        mnemonics: userData.data.mnemonics,
+        message: message,
+        post_type: post_type,
+        friendPublicKey: friend.friendPublicKey,
+      })
+      .then((respone) => {
+        console.log(respone);
+        setMessage('');
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Something went wrong.');
+      });
+  };
+
+  const getListOfMessages = (post_type_text) => {
+    axios
+      .post('http://localhost:4567/messages/get_messages', {
+        mnemonics: userData.data.mnemonics,
+        address: userData.data.address,
+        post_type: post_type_text,
+      })
+      .then((response) => {
+        setpost_type(post_type_text);
+        if (listOfMessages.reverse() !== response.data.messages) {
+          var messagesArray = response.data.messages;
+          setListOfMessages(messagesArray.reverse());
+          scrollRef.current.scrollIntoView();
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        alert('Something went wrong.');
+      });
   };
 
   useEffect(() => {
-    scrollRef.current.scrollIntoView();
+    var post_type_array = [
+      userData.data.username.toLowerCase(),
+      friend.friendUsername.toLowerCase(),
+    ];
+    post_type_array.sort();
+    var post_type_text = post_type_array[0] + '_' + post_type_array[1];
+
+    getListOfMessages(post_type_text);
+
+    const interval = setInterval(() => {
+      getListOfMessages(post_type_text);
+    }, 5000);
+
+    return () => clearInterval(interval);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -50,11 +105,13 @@ const Conversation = (props) => {
 
         <div className='overflow-hidden'>
           <div className='h-[510px] overflow-scroll scrollbar-hide scroll-smooth grid grid-cols-1 auto-rows-max gap-4'>
-            <MessageFriend />
-            <MessageUser />
-            <MessageUser />
-            <MessageFriend />
-            <MessageUser />
+            {listOfMessages.map((message) => {
+              if (message.sender === userData.data.address) {
+                return <MessageUser messageContent={message.message} />;
+              } else {
+                return <MessageFriend messageContent={message.message} />;
+              }
+            })}
             <div ref={scrollRef} className='display-none'></div>
           </div>
         </div>

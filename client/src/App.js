@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Topbar from './components/Topbar/Topbar';
 import Conversation from './components/Conversation/Conversation';
+import Settings from './components/Settings/Settings';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                   path='/conversation/:friendUsername'
                   element={<Conversation />}
                 />
+                <Route exact path='/settings' element={<Settings />} />
               </Routes>
             </div>
           </div>
