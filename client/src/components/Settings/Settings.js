@@ -19,7 +19,7 @@ const Settings = () => {
     console.log(userData.data.username);
     console.log(friendName);
     axios
-      .post('http://localhost:4567/addfriend', {
+      .post('http://localhost:4567/users/addfriend', {
         username: userData.data.username,
         friendUsername: friendName,
       })

@@ -64,7 +64,7 @@ const Conversation = (props) => {
       })
       .catch((error) => {
         console.log(error);
-        alert('Something went wrong.');
+        console.log('Something went wrong.');
       });
   };
 
@@ -80,7 +80,7 @@ const Conversation = (props) => {
 
     const interval = setInterval(() => {
       getListOfMessages(post_type_text);
-    }, 5000);
+    }, 3500);
 
     return () => clearInterval(interval);
 
