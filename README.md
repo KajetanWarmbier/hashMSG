@@ -3,11 +3,10 @@ Repozytorium zawiera aplikację do czatowania, która została stworzona w techn
 Stworzone w celu zaliczenia przedmiotu.   
 ***
 Aplikacja posiada takie funkcjonalności jak:
-* logowanie i rejestrację użytkownika
+* logowanie i rejestracje użytkownika
 * przechowywanie listy kontaktów
 * operacje dodawania i usuwania kontaktu   
 # Informacje dodatkowe
-***  
 __Narzędzia:__  
 __Środowisko:__  
 ***
