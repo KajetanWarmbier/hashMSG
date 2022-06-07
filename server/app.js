@@ -20,6 +20,7 @@ mongoose.connect(
 
 //routes files
 const userRoutes = require('./api/routes/users');
+const messageRoutes = require('./api/routes/messages');
 
 //express instance
 const app = express();
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 
 //routes
 app.use('/users', userRoutes);
+app.use('/messages', messageRoutes);
 
 app.use((req, res, next) => {
   res.status(404).json({ message: 'Not Found' });

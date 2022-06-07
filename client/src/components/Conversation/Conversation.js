@@ -4,6 +4,7 @@ import UserAvatar from '../UsersPersonality/UserAvatar';
 import MessageFriend from './MessageFriend';
 import MessageUser from './MessageUser';
 import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Conversation = (props) => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Conversation = (props) => {
   const scrollRef = useRef();
 
   const [message, setMessage] = useState('');
+  const userData = useSelector((state) => state.userData);
 
   const backToHome = () => {
     navigate('/home', { replace: true });
