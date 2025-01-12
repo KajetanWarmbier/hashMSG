@@ -13,9 +13,8 @@ mongoose.connect(
     process.env.DB_PASS +
     '@' +
     process.env.DB_CLUSTER +
-    '.mongodb.net/' +
-    process.env.DB_NAME +
-    '?retryWrites=true&w=majority'
+    '.mongodb.net/?retryWrites=true&w=majority&appName=' +
+    process.env.DB_NAME
 );
 
 //routes files

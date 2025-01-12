@@ -4,7 +4,7 @@ const UserAvatar = (props) => {
       <img
         width='60px'
         height='60px'
-        src={`https://avatars.dicebear.com/api/bottts/${props.userProfileData.friendUsername}.svg`}
+        src={`https://api.dicebear.com/9.x/bottts/svg?seed=${props.userProfileData.friendUsername}`}
         alt={`${props.userProfileData} Avatar`}
       ></img>
     </div>
