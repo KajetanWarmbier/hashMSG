@@ -19,6 +19,9 @@ __Środowisko:__
 * Node.js
 ***
 
+# Materiały projektowe
+* [Dokumentacja](./readme_static/dokumentacja_aplikacji_hashmsg.pdf)
+* [Prezentacja](./readme_static/blockchain_prezentacja.pdf)
 # Ekrany aplikacji
 ![hashMSG Welcome Screen](./readme_static/hashmsg_welcome-screen.jpeg)
 ![hashMSG Login Screen](./readme_static/hashmsg_login-screen.jpeg)
