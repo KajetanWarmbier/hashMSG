@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-const Conversation = (props) => {
+const Conversation = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
   const { friendUsername, friendPublicKey } = state;
@@ -23,9 +23,7 @@ const Conversation = (props) => {
   const [post_type, setpost_type] = useState('');
   const userData = useSelector((state) => state.userData);
 
-  const backToHome = () => {
-    navigate('/home', { replace: true });
-  };
+  const backToHome = () => navigate('/home', { replace: true });
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -37,14 +35,8 @@ const Conversation = (props) => {
         post_type: post_type,
         friendPublicKey: friend.friendPublicKey,
       })
-      .then((respone) => {
-        console.log(respone);
-        setMessage('');
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('Something went wrong.');
-      });
+      .then(() => setMessage(''))
+      .catch((error) => console.error(error));
   };
 
   const getListOfMessages = (post_type_text) => {
@@ -57,24 +49,21 @@ const Conversation = (props) => {
       .then((response) => {
         setpost_type(post_type_text);
         if (listOfMessages.reverse() !== response.data.messages) {
-          var messagesArray = response.data.messages;
+          let messagesArray = response.data.messages;
           setListOfMessages(messagesArray.reverse());
           scrollRef.current.scrollIntoView();
         }
       })
-      .catch((error) => {
-        console.log(error);
-        console.log('Something went wrong.');
-      });
+      .catch((error) => console.error(error));
   };
 
   useEffect(() => {
-    var post_type_array = [
+    const post_type_array = [
       userData.data.username.toLowerCase(),
       friend.friendUsername.toLowerCase(),
     ];
     post_type_array.sort();
-    var post_type_text = post_type_array[0] + '_' + post_type_array[1];
+    const post_type_text = post_type_array[0] + '_' + post_type_array[1];
 
     getListOfMessages(post_type_text);
 

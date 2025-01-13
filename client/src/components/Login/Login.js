@@ -25,12 +25,11 @@ const Login = () => {
       })
       .then((response) => {
         setPassword('');
-        console.log(response);
         dispatch(setUserData(response.data.userData));
         navigate('/home', { replace: true });
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         alert('Auth Failed.');
       });
     setPassword('');

@@ -8,33 +8,24 @@ const Settings = () => {
   const userData = useSelector((state) => state.userData);
   const navigate = useNavigate();
 
-  const backToHome = () => {
-    navigate('/home', { replace: true });
-  };
+  const backToHome = () => navigate('/home', { replace: true });
 
   const [friendName, setFriendName] = useState('');
   const [friendToDelete, setFriendToDelete] = useState('');
   const addFriend = (event) => {
     event.preventDefault();
-    console.log(userData.data.username);
-    console.log(friendName);
+
     axios
       .post('http://localhost:4567/users/addfriend', {
         username: userData.data.username,
         friendUsername: friendName,
       })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((error) => {
-        console.log(error);
-        alert('Ups...');
-      });
+      .catch((error) => console.error(error));
     setFriendName('');
   };
   const deleteFriend = (event) => {
     event.preventDefault();
-    alert('Programista zasnął nim zdążył dopisać.');
+    alert('Not yet implemented.');
     setFriendToDelete('');
   };
 

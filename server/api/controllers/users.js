@@ -26,8 +26,8 @@ exports.user_sign_up = (req, res, next) => {
                 .then(() => {
                   res.status(201).json({ message: 'User created' });
                 })
-                .catch((err) => {
-                  console.log(err);
+                .catch((error) => {
+                  console.error(error);
                   res
                     .status(500)
                     .json({ message: 'Server has encountered an error.' });
@@ -35,7 +35,7 @@ exports.user_sign_up = (req, res, next) => {
             });
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
             res.status(500).json({ message: 'Something went wrong.' });
           });
       } else {
@@ -45,7 +45,7 @@ exports.user_sign_up = (req, res, next) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       res.status(500).json({ message: 'Something went wrong.' });
     });
 };
@@ -80,20 +80,20 @@ exports.user_login = (req, res, next) => {
             }
           })
           .catch((error) => {
-            console.log(error);
+            console.error(error);
             res.status(500).json({ message: 'Something went wrong.' });
           });
       }
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       res.status(500).json({ message: 'Something went wrong.' });
     });
 };
 
 exports.user_add_friend = (req, res, next) => {
   User.findOne({ username: req.body.username })
-    .then((user) => {
+    .then(() => {
       User.findOne({ username: req.body.friendUsername })
         .then((friend) => {
           if (!friend) {
@@ -101,7 +101,7 @@ exports.user_add_friend = (req, res, next) => {
               .status(401)
               .json({ message: "User with this username doesn't exist." });
           } else {
-            var friendCredits = {
+            const friendCredits = {
               friendUsername: friend.username,
               friendPublicKey: friend.public_key,
             };
@@ -117,12 +117,12 @@ exports.user_add_friend = (req, res, next) => {
           }
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           res.status(500).json({ message: 'Something went wrong.' });
         });
     })
     .catch((error) => {
-      console.log(error);
+      console.error(error);
       res.status(500).json({ message: 'Something went wrong.' });
     });
 };

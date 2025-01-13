@@ -23,15 +23,14 @@ const Register = () => {
           username: username,
           password: password,
         })
-        .then((response) => {
+        .then(() => {
           setPassword('');
           setRepeatPassword('');
-          console.log(response);
           alert('Account has been created');
           navigate('/login', { replace: true });
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           alert('Auth failed.');
         });
       setPassword('');
